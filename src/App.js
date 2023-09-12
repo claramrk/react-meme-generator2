@@ -3,43 +3,38 @@ import React, { useEffect, useState } from 'react';
 let templateArray = [];
 
 export default function App() {
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [image, setImage] = useState(null);
+  const [topText, setTopText] = useState(null);
+  const [bottomText, setBottomText] = useState(null);
 
   useEffect(() => {
     fetch(`https://api.memegen.link/templates/`)
       .then((response) => response.json())
-      .then((usefulData) => {
-        console.log(usefulData);
-        setLoading(false);
-        setData(usefulData);
-        templateArray = usefulData;
+      .then((data) => {
+        console.log(data);
+        setImage(data[0].example.url);
+        setTopText(data[0].example.text[0]);
+        setBottomText(data[0].example.text[1]);
       })
       .catch((e) => {
         console.error(`An error occurred: ${e}`);
       });
   }, []);
+
   return (
     <>
       <h1>Meme Generator</h1>
-      <div className="App">
-        {loading && <p>Loading...</p>}
-        {!loading && <p>Fetched data</p>}
-      </div>
-      <br />
-      <br />
       <div className="memePreview">
-        <img href="" alt="background for meme" data-test-id="meme-image" />
+        <img src={image} alt="background for meme" data-test-id="meme-image" />
       </div>
       <br />
       <br />
       <div className="textInput">
         <label htmlFor="Top Text">Top Text:</label>
-        <input name="Top Text" id="Top Text" />
+        <input name="Top Text" id="Top Text" value={topText} />
         <br />
         <label htmlFor="Bottom Text">Bottom Text:</label>
-        <input name="Bottom Text" id="Bottom Text" />
+        <input name="Bottom Text" id="Bottom Text" value={bottomText} />
       </div>
       <br />
       <br />
