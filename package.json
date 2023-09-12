@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "@upleveled/react-scripts": "5.0.11",
+    "axios": "^1.5.0",
+    "puppeteer": "^21.1.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
