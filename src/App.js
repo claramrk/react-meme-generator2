@@ -13,6 +13,7 @@ export default function App() {
   const [image, setImage] = useState(null);
   const [topTextInput, setTopTextInput] = useState(null);
   const [bottomTextInput, setBottomTextInput] = useState(null);
+  const [imageIDInput, setImageIDInput] = useState(null);
 
   useEffect(() => {
     fetch(`https://api.memegen.link/templates/`)
@@ -35,7 +36,7 @@ export default function App() {
   }, []);
 
   const handleClick = () => {
-    saveAs(generatedMemeURL, 'Downloaded-image');
+    saveAs(generatedMemeURL, `${currentImageID}/${topText}/${bottomText}.png`);
   };
 
   console.log(topText);
@@ -84,19 +85,26 @@ export default function App() {
       <br />
       <br />
       <div className="memeTemplateInput">
-        <label htmlFor="Templates">Meme Template</label>
-        <br />
-        <input
-          name="TemplateSelect"
-          id="TemplateSelect"
-          onSubmit={(event) => {}}
-        />
-
-        {/*
-        <select value="Templates">
-        <Options array={imageIds} />
-        </select>
-        */}
+        <form
+          onSubmit={(event) => {
+            event.preventDefault();
+            currentImageID = imageIDInput;
+            topText = '_';
+            bottomText = '_';
+            generatedMemeURL = `https://api.memegen.link/images/${currentImageID}/${topText}/${bottomText}.png`;
+            setImage(generatedMemeURL);
+          }}
+        >
+          <label htmlFor="TemplateSelect">Meme Template</label>
+          <br />
+          <input
+            name="TemplateSelect"
+            id="TemplateSelect"
+            onChange={(event) => {
+              setImageIDInput(event.currentTarget.value);
+            }}
+          />
+        </form>
       </div>
       <br />
       <br />
