@@ -1,14 +1,14 @@
 import './my-sass.scss';
+import './Options.js';
 import { saveAs } from 'file-saver';
 import React, { useEffect, useState } from 'react';
 
 let currentImage;
+let currentImageID;
 let currentImageLink;
-let topText;
-let bottomText;
+let topText = '_';
+let bottomText = '_';
 let generatedMemeURL;
-let currentImageLinkSliced;
-
 export default function App() {
   const [image, setImage] = useState(null);
   const [topTextInput, setTopTextInput] = useState(null);
@@ -19,12 +19,10 @@ export default function App() {
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-        currentImage = data[2];
+        currentImage = data[9];
+        currentImageID = currentImage.id;
         currentImageLink = currentImage.blank;
-        currentImageLinkSliced = currentImageLink.slice(0, -4);
-        topText = currentImage.example.text[0];
-        bottomText = currentImage.example.text[1];
-        generatedMemeURL = `${currentImageLinkSliced}/${topText}_/${bottomText}.png`;
+        generatedMemeURL = `https://api.memegen.link/images/${currentImageID}/${topText}/${bottomText}.png`;
         console.log(generatedMemeURL);
 
         let imageIds = data.map((d) => d.id);
@@ -62,10 +60,10 @@ export default function App() {
           name="Top Text"
           id="Top Text"
           onChange={(event) => {
-            setTopTextInput(event.currentTarget.value);
             topText = topTextInput;
-            generatedMemeURL = `${currentImageLinkSliced}/${topText}_/${bottomText}.png`;
+            generatedMemeURL = `https://api.memegen.link/images/${currentImageID}/${topText}/${bottomText}.png`;
             console.log(generatedMemeURL);
+            setTopTextInput(event.currentTarget.value);
             setImage(generatedMemeURL);
           }}
         />
@@ -75,10 +73,10 @@ export default function App() {
           name="Bottom Text"
           id="Bottom Text"
           onChange={(event) => {
-            setBottomTextInput(event.currentTarget.value);
             bottomText = bottomTextInput;
-            generatedMemeURL = `${currentImageLinkSliced}/${topText}_/${bottomText}.png`;
+            generatedMemeURL = `https://api.memegen.link/images/${currentImageID}/${topText}/${bottomText}.png`;
             console.log(generatedMemeURL);
+            setBottomTextInput(event.currentTarget.value);
             setImage(generatedMemeURL);
           }}
         />
@@ -88,11 +86,17 @@ export default function App() {
       <div className="memeTemplateInput">
         <label htmlFor="Templates">Meme Template</label>
         <br />
+        <input
+          name="TemplateSelect"
+          id="TemplateSelect"
+          onSubmit={(event) => {}}
+        />
+
+        {/*
         <select value="Templates">
-          <option value="none"> - </option>
-          <option value="Template 1">Template 1</option>
-          <option value="Template 2">Template 2</option>
+        <Options array={imageIds} />
         </select>
+        */}
       </div>
       <br />
       <br />
