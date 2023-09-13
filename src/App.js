@@ -1,11 +1,9 @@
 import './my-sass.scss';
-import './Options.js';
 import { saveAs } from 'file-saver';
 import React, { useEffect, useState } from 'react';
 
 let currentImage;
 let currentImageID;
-let currentImageLink;
 let topText = '_';
 let bottomText = '_';
 let generatedMemeURL;
@@ -22,11 +20,10 @@ export default function App() {
         console.log(data);
         currentImage = data[9];
         currentImageID = currentImage.id;
-        currentImageLink = currentImage.blank;
         generatedMemeURL = `https://api.memegen.link/images/${currentImageID}/${topText}/${bottomText}.png`;
         console.log(generatedMemeURL);
 
-        let imageIds = data.map((d) => d.id);
+        const imageIds = data.map((d) => d.id);
         console.log(imageIds);
         setImage(generatedMemeURL);
       })
