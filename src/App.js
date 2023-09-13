@@ -2,22 +2,19 @@ import './my-sass.scss';
 import { saveAs } from 'file-saver';
 import React, { useEffect, useState } from 'react';
 
-let templateArray = [];
+let currentImage;
 let generatedMemeURL;
 
 export default function App() {
   const [image, setImage] = useState(null);
-  const [topText, setTopText] = useState(null);
-  const [bottomText, setBottomText] = useState(null);
 
   useEffect(() => {
     fetch(`https://api.memegen.link/templates/`)
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-        setImage(data[0].example.url);
-        setTopText(data[0].example.text[0]);
-        setBottomText(data[0].example.text[1]);
+        currentImage = data[0].example.url;
+        setImage(currentImage);
       })
       .catch((e) => {
         console.error(`An error occurred: ${e}`);
@@ -25,8 +22,7 @@ export default function App() {
   }, []);
 
   const handleClick = () => {
-    let url = { image };
-    saveAs(url, 'Downloaded-image');
+    saveAs(currentImage, 'Downloaded-image');
   };
 
   return (
@@ -48,10 +44,10 @@ export default function App() {
         <br />
         <div className="textInput">
           <label htmlFor="Top Text">Top Text:</label>
-          <input name="Top Text" id="Top Text" value={topText} />
+          <input name="Top Text" id="Top Text" />
           <br />
           <label htmlFor="Bottom Text">Bottom Text:</label>
-          <input name="Bottom Text" id="Bottom Text" value={bottomText} />
+          <input name="Bottom Text" id="Bottom Text" />
         </div>
         <br />
         <br />
