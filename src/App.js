@@ -84,7 +84,7 @@ export default function App() {
       </div>
       <br />
       <br />
-      <div className="memeTemplateInput">
+      <div className="textInput">
         <form
           onSubmit={(event) => {
             event.preventDefault();
@@ -100,6 +100,7 @@ export default function App() {
           <input
             name="TemplateSelect"
             id="TemplateSelect"
+            defaultValue={currentImageID}
             onChange={(event) => {
               setImageIDInput(event.currentTarget.value);
             }}
