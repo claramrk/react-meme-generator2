@@ -3,26 +3,32 @@ import { saveAs } from 'file-saver';
 import React, { useEffect, useState } from 'react';
 
 let currentImage;
+let currentImageLink;
 let topText;
 let bottomText;
 let generatedMemeURL;
-let currentImageSliced;
+let currentImageLinkSliced;
 
 export default function App() {
   const [image, setImage] = useState(null);
   const [topTextInput, setTopTextInput] = useState(null);
+  const [bottomTextInput, setBottomTextInput] = useState(null);
 
   useEffect(() => {
     fetch(`https://api.memegen.link/templates/`)
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-        currentImage = data[0].blank;
-        currentImageSliced = currentImage.slice(0, -4);
-        topText = data[0].example.text[0];
-        bottomText = data[0].example.text[1];
-        generatedMemeURL = `${currentImageSliced}/${topText}_/${bottomText}.png`;
+        currentImage = data[2];
+        currentImageLink = currentImage.blank;
+        currentImageLinkSliced = currentImageLink.slice(0, -4);
+        topText = currentImage.example.text[0];
+        bottomText = currentImage.example.text[1];
+        generatedMemeURL = `${currentImageLinkSliced}/${topText}_/${bottomText}.png`;
         console.log(generatedMemeURL);
+
+        let imageIds = data.map((d) => d.id);
+        console.log(imageIds);
         setImage(generatedMemeURL);
       })
       .catch((e) => {
@@ -58,14 +64,24 @@ export default function App() {
           onChange={(event) => {
             setTopTextInput(event.currentTarget.value);
             topText = topTextInput;
-            generatedMemeURL = `${currentImageSliced}/${topText}_/${bottomText}.png`;
+            generatedMemeURL = `${currentImageLinkSliced}/${topText}_/${bottomText}.png`;
             console.log(generatedMemeURL);
             setImage(generatedMemeURL);
           }}
         />
         <br />
         <label htmlFor="Bottom Text">Bottom Text:</label>
-        <input name="Bottom Text" id="Bottom Text" />
+        <input
+          name="Bottom Text"
+          id="Bottom Text"
+          onChange={(event) => {
+            setBottomTextInput(event.currentTarget.value);
+            bottomText = bottomTextInput;
+            generatedMemeURL = `${currentImageLinkSliced}/${topText}_/${bottomText}.png`;
+            console.log(generatedMemeURL);
+            setImage(generatedMemeURL);
+          }}
+        />
       </div>
       <br />
       <br />
