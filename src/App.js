@@ -8,17 +8,15 @@ export default function App() {
   const [bottomTextInput, setBottomTextInput] = useState('_');
   const [imageIDInput, setImageIDInput] = useState('aag');
 
+  const imgURL = `https://api.memegen.link/images/${imageIDInput}/${topTextInput}/${bottomTextInput}.png`;
+
   useEffect(() => {
     fetch(`https://api.memegen.link/templates/`)
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-        console.log(
-          `https://api.memegen.link/images/${imageIDInput}/${topTextInput}/${bottomTextInput}.png`,
-        );
-        setImage(
-          `https://api.memegen.link/images/${imageIDInput}/${topTextInput}/${bottomTextInput}.png`,
-        );
+        console.log(imgURL);
+        setImage(imgURL);
       })
       .catch((e) => {
         console.error(`An error occurred: ${e}`);
@@ -27,12 +25,8 @@ export default function App() {
 
   const handleTopText = (event) => {
     setTopTextInput(event.target.value);
-    console.log(
-      `https://api.memegen.link/images/${imageIDInput}/${topTextInput}/${bottomTextInput}.png`,
-    );
-    setImage(
-      `https://api.memegen.link/images/${imageIDInput}/${topTextInput}/${bottomTextInput}.png`,
-    );
+    console.log(imgURL);
+    setImage(imgURL);
   };
 
   const handleClick = () => {
@@ -73,9 +67,7 @@ export default function App() {
                 id="Bottom Text"
                 onChange={(event) => {
                   setBottomTextInput(event.currentTarget.value);
-                  setImage(
-                    `https://api.memegen.link/images/${imageIDInput}/${topTextInput}/${bottomTextInput}.png`,
-                  );
+                  setImage(imgURL);
                 }}
               />
             </form>
@@ -84,12 +76,8 @@ export default function App() {
             <form
               onSubmit={(event) => {
                 event.preventDefault();
-                setImage(
-                  `https://api.memegen.link/images/${imageIDInput}/${topTextInput}/${bottomTextInput}.png`,
-                );
-                console.log(
-                  `https://api.memegen.link/images/${imageIDInput}/${topTextInput}/${bottomTextInput}.png`,
-                );
+                setImage(imgURL);
+                console.log(imgURL);
               }}
             >
               <label htmlFor="TemplateSelect">Meme Template</label>
