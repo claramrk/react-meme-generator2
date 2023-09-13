@@ -44,7 +44,9 @@ h1 {
     display: block;
     margin: 0 auto;
     border-radius: 10px;
-    box-shadow: 12px 12px 2px 1px $charcoal;
+    &:hover {
+      box-shadow: 12px 12px 2px 1px $charcoal;
+    }
   }
 }
 
