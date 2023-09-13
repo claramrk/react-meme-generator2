@@ -8,47 +8,36 @@ export default function App() {
   const [bottomTextInput, setBottomTextInput] = useState('_');
   const [imageIDInput, setImageIDInput] = useState('aag');
 
-  let generatedMemeURL;
-
   useEffect(() => {
     fetch(`https://api.memegen.link/templates/`)
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-        let currentImage = data[0];
-        setImageIDInput(currentImage.id);
-        generatedMemeURL = `https://api.memegen.link/images/${imageIDInput}/${topTextInput}/${bottomTextInput}.png`;
-        console.log(generatedMemeURL);
-
-        const imageIds = data.map((d) => d.id);
-        console.log(imageIds);
-        setImage(generatedMemeURL);
+        console.log(
+          `https://api.memegen.link/images/${imageIDInput}/${topTextInput}/${bottomTextInput}.png`,
+        );
+        setImage(
+          `https://api.memegen.link/images/${imageIDInput}/${topTextInput}/${bottomTextInput}.png`,
+        );
       })
       .catch((e) => {
         console.error(`An error occurred: ${e}`);
       });
   }, []);
 
-  const handleClick = () => {
-    saveAs(
-      generatedMemeURL,
-      `${imageIDInput}/${topTextInput}/${bottomTextInput}.png`,
+  const handleTopText = (event) => {
+    setTopTextInput(event.target.value);
+    console.log(
+      `https://api.memegen.link/images/${imageIDInput}/${topTextInput}/${bottomTextInput}.png`,
+    );
+    setImage(
+      `https://api.memegen.link/images/${imageIDInput}/${topTextInput}/${bottomTextInput}.png`,
     );
   };
 
-  function handleChangeTop(e) {
-    generatedMemeURL = `https://api.memegen.link/images/${imageIDInput}/${topTextInput}/${bottomTextInput}.png`;
-    console.log(generatedMemeURL);
-    setTopTextInput(e.currentTarget.value);
-    setImage(generatedMemeURL);
-  }
-
-  function handleChangeBottom(e) {
-    generatedMemeURL = `https://api.memegen.link/images/${imageIDInput}/${topTextInput}/${bottomTextInput}.png`;
-    console.log(generatedMemeURL);
-    setBottomTextInput(e.currentTarget.value);
-    setImage(generatedMemeURL);
-  }
+  const handleClick = () => {
+    saveAs(image, `${imageIDInput}/${topTextInput}/${bottomTextInput}.png`);
+  };
 
   console.log(topTextInput);
   console.log(bottomTextInput);
@@ -70,24 +59,37 @@ export default function App() {
         </div>
         <div className="main-right">
           <div className="textInput">
-            <label htmlFor="Top Text">Top Text:</label>
-            <input name="Top Text" id="Top Text" onChange={handleChangeTop} />
-            <br />
-            <label htmlFor="Bottom Text">Bottom Text:</label>
-            <input
-              name="Bottom Text"
-              id="Bottom Text"
-              onChange={handleChangeBottom}
-            />
+            <form
+              onSubmit={(event) => {
+                event.preventDefault();
+              }}
+            >
+              <label htmlFor="Top Text">Top Text:</label>
+              <input name="Top Text" id="Top Text" onChange={handleTopText} />
+              <br />
+              <label htmlFor="Bottom Text">Bottom Text:</label>
+              <input
+                name="Bottom Text"
+                id="Bottom Text"
+                onChange={(event) => {
+                  setBottomTextInput(event.currentTarget.value);
+                  setImage(
+                    `https://api.memegen.link/images/${imageIDInput}/${topTextInput}/${bottomTextInput}.png`,
+                  );
+                }}
+              />
+            </form>
           </div>
           <div className="memeTemplateInput">
             <form
               onSubmit={(event) => {
                 event.preventDefault();
-                setTopTextInput('_');
-                setBottomTextInput('_');
-                generatedMemeURL = `https://api.memegen.link/images/${imageIDInput}/${topTextInput}/${bottomTextInput}.png`;
-                setImage(generatedMemeURL);
+                setImage(
+                  `https://api.memegen.link/images/${imageIDInput}/${topTextInput}/${bottomTextInput}.png`,
+                );
+                console.log(
+                  `https://api.memegen.link/images/${imageIDInput}/${topTextInput}/${bottomTextInput}.png`,
+                );
               }}
             >
               <label htmlFor="TemplateSelect">Meme Template</label>
