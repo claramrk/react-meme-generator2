@@ -3,13 +3,14 @@ import { saveAs } from 'file-saver';
 import React, { useEffect, useState } from 'react';
 
 let currentImage;
-let textOne;
-let textTwo;
+let topText;
+let bottomText;
 let generatedMemeURL;
 let currentImageSliced;
 
 export default function App() {
   const [image, setImage] = useState(null);
+  const [topTextInput, setTopTextInput] = useState(null);
 
   useEffect(() => {
     fetch(`https://api.memegen.link/templates/`)
@@ -18,9 +19,9 @@ export default function App() {
         console.log(data);
         currentImage = data[0].blank;
         currentImageSliced = currentImage.slice(0, -4);
-        textOne = data[0].example.text[0];
-        textTwo = data[0].example.text[1];
-        generatedMemeURL = `${currentImageSliced}/${textOne}_/${textTwo}.png`;
+        topText = data[0].example.text[0];
+        bottomText = data[0].example.text[1];
+        generatedMemeURL = `${currentImageSliced}/${topText}_/${bottomText}.png`;
         console.log(generatedMemeURL);
         setImage(generatedMemeURL);
       })
@@ -30,8 +31,11 @@ export default function App() {
   }, []);
 
   const handleClick = () => {
-    saveAs(currentImage, 'Downloaded-image');
+    saveAs(generatedMemeURL, 'Downloaded-image');
   };
+
+  console.log(topText);
+  console.log(bottomText);
 
   return (
     <body>
@@ -48,7 +52,17 @@ export default function App() {
       <br />
       <div className="textInput">
         <label htmlFor="Top Text">Top Text:</label>
-        <input name="Top Text" id="Top Text" />
+        <input
+          name="Top Text"
+          id="Top Text"
+          onChange={(event) => {
+            setTopTextInput(event.currentTarget.value);
+            topText = topTextInput;
+            generatedMemeURL = `${currentImageSliced}/${topText}_/${bottomText}.png`;
+            console.log(generatedMemeURL);
+            setImage(generatedMemeURL);
+          }}
+        />
         <br />
         <label htmlFor="Bottom Text">Bottom Text:</label>
         <input name="Bottom Text" id="Bottom Text" />
