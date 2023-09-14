@@ -108,14 +108,18 @@ export default function App() {
               />
             </form>
           </div>
+          {/*
           <div className="datalist">
             <input list="data" />
+
             <datalist>
               {dataIDs.map((d) => {
                 return <option key={`dataID-${d}`} value={d} />;
               })}
             </datalist>
+
           </div>
+          */}
           <div className="download">
             <button onClick={handleClick}>Download</button>
           </div>
