@@ -96,7 +96,7 @@ export default function App() {
                 );
               }}
             >
-              <label htmlFor="TemplateSelect">Meme Template</label>
+              <label htmlFor="TemplateSelect">Meme template</label>
               <br />
               <input
                 name="TemplateSelect"
