@@ -23,14 +23,6 @@ export default function App() {
       });
   }, []);
 
-  const handleTopText = (event) => {
-    setTopTextInput(event.target.value);
-    console.log(imgURL);
-    setImage(
-      `https://api.memegen.link/images/${imageIDInput}/${event.target.value}/${bottomTextInput}.png`,
-    );
-  };
-
   const handleClick = () => {
     saveAs(image, `${imageIDInput}/${topTextInput}/${bottomTextInput}.png`);
   };
