@@ -9,7 +9,6 @@ export default function App() {
   const [topTextInput, setTopTextInput] = useState('_');
   const [bottomTextInput, setBottomTextInput] = useState('_');
   const [imageIDInput, setImageIDInput] = useState('aag');
-  const [dataList, setDataList] = useState();
 
   const dataIDs = [];
 
@@ -18,20 +17,19 @@ export default function App() {
       .then((response) => response.json())
       .then((data) => {
         data.map((d) => dataIDs.push(d.id));
-        console.log(data);
-        console.log(dataIDs);
+        // console.log(data);
+        return dataIDs;
       })
       .catch((e) => {
         console.error(`An error occurred: ${e}`);
       });
   });
 
+  console.log(dataIDs);
+
   const handleClick = () => {
     saveAs(image, `${imageIDInput}/${topTextInput}/${bottomTextInput}.png`);
   };
-
-  // console.log(topTextInput);
-  // console.log(bottomTextInput);
 
   return (
     <body>
@@ -100,6 +98,14 @@ export default function App() {
                 }}
               />
             </form>
+          </div>
+          <div className="datalist">
+            <input list="data" />
+            <datalist>
+              {dataIDs.map((d) => {
+                return <option key={`dataID-${d}`} value={d} />;
+              })}
+            </datalist>
           </div>
           <div className="download">
             <button onClick={handleClick}>Download</button>
