@@ -53,7 +53,7 @@ export default function App() {
                 event.preventDefault();
               }}
             >
-              <label htmlFor="Top Text">Top Text:</label>
+              <label htmlFor="Top Text">Top Text</label>
               <input
                 name="Top Text"
                 id="Top Text"
@@ -74,7 +74,7 @@ export default function App() {
                 }}
               />
               <br />
-              <label htmlFor="Bottom Text">Bottom Text:</label>
+              <label htmlFor="Bottom Text">Bottom Text</label>
               <input
                 name="Bottom Text"
                 id="Bottom Text"
