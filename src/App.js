@@ -21,7 +21,7 @@ export default function App() {
       .catch((e) => {
         console.error(`An error occurred: ${e}`);
       });
-  }, []);
+  });
 
   const handleClick = () => {
     saveAs(image, `${imageIDInput}/${topTextInput}/${bottomTextInput}.png`);

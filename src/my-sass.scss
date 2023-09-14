@@ -35,19 +35,41 @@ h1 {
   font-family: $font-family;
 }
 
-.memePreview {
-  margin-top: 20px;
-  padding: 10px;
-  img {
-    max-width: 70%;
-    height: auto;
-    display: block;
-    margin: 0 auto;
-    border-radius: 10px;
-    &:hover {
-      box-shadow: 12px 12px 2px 1px $charcoal;
-    }
-  }
+.memePreview .image-frame {
+  background: #ffffff;
+  display: inline-block;
+  margin: 55px 75px 30px;
+  padding: 15px 15px 30px;
+  text-align: center;
+  text-decoration: none;
+  -webkit-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  -webkit-transition: all 0.2s linear;
+  -moz-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+  z-index: 0;
+  position: relative;
+}
+.memePreview .image-frame:after {
+  color: #333;
+  font-size: 25px;
+  content: attr(title);
+  position: relative;
+  top: 15px;
+}
+.memePreview img {
+  display: block;
+  width: 250px;
+}
+.polaroid a:hover {
+  -webkit-transform: scale(1.2);
+  -moz-transform: scale(1.2);
+  transform: scale(1.2);
+  z-index: 10;
+  -webkit-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7);
+  -moz-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7);
 }
 
 .textInput {
