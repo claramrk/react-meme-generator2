@@ -58,10 +58,19 @@ export default function App() {
                 name="Top Text"
                 id="Top Text"
                 onChange={(event) => {
-                  setTopTextInput(event.target.value);
-                  setImage(
-                    `https://api.memegen.link/images/${imageIDInput}/${event.target.value}/${bottomTextInput}.png`,
-                  );
+                  //  setTopTextInput(event.target.value);
+                  if (event.target.value.length > 0) {
+                    setTopTextInput(event.target.value);
+                    setImage(
+                      `https://api.memegen.link/images/${imageIDInput}/${event.target.value}/${bottomTextInput}.png`,
+                    );
+                  } else {
+                    setTopTextInput('_');
+                    setImage(
+                      `https://api.memegen.link/images/${imageIDInput}/_/${bottomTextInput}.png`,
+                    );
+                  }
+                  // setImage( `https://api.memegen.link/images/${imageIDInput}/${event.target.value}/${bottomTextInput}.png`, );
                 }}
               />
               <br />
