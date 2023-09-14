@@ -26,7 +26,9 @@ export default function App() {
   const handleTopText = (event) => {
     setTopTextInput(event.target.value);
     console.log(imgURL);
-    setImage(imgURL);
+    setImage(
+      `https://api.memegen.link/images/${imageIDInput}/${event.target.value}/${bottomTextInput}.png`,
+    );
   };
 
   const handleClick = () => {
@@ -59,7 +61,16 @@ export default function App() {
               }}
             >
               <label htmlFor="Top Text">Top Text:</label>
-              <input name="Top Text" id="Top Text" onChange={handleTopText} />
+              <input
+                name="Top Text"
+                id="Top Text"
+                onChange={(event) => {
+                  setTopTextInput(event.target.value);
+                  setImage(
+                    `https://api.memegen.link/images/${imageIDInput}/${event.target.value}/${bottomTextInput}.png`,
+                  );
+                }}
+              />
               <br />
               <label htmlFor="Bottom Text">Bottom Text:</label>
               <input
@@ -67,7 +78,9 @@ export default function App() {
                 id="Bottom Text"
                 onChange={(event) => {
                   setBottomTextInput(event.currentTarget.value);
-                  setImage(imgURL);
+                  setImage(
+                    `https://api.memegen.link/images/${imageIDInput}/${topTextInput}/${event.currentTarget.value}.png`,
+                  );
                 }}
               />
             </form>
