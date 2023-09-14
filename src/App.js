@@ -32,7 +32,7 @@ export default function App() {
   };
 
   return (
-    <body>
+    <div className="main-main">
       <h1>Meme Generator</h1>
       <div className="main">
         <div className="main-left">
@@ -83,7 +83,7 @@ export default function App() {
               onSubmit={(event) => {
                 event.preventDefault();
                 setImage(
-                  `https://api.memegen.link/images/${imageIDInput}/${topTextInput}/${event.currentTarget.value}.png`,
+                  `https://api.memegen.link/images/${imageIDInput}/${topTextInput}/${bottomTextInput}.png`,
                 );
               }}
             >
@@ -112,6 +112,6 @@ export default function App() {
           </div>
         </div>
       </div>
-    </body>
+    </div>
   );
 }
