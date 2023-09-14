@@ -3,20 +3,23 @@ import { saveAs } from 'file-saver';
 import React, { useEffect, useState } from 'react';
 
 export default function App() {
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState(
+    'https://api.memegen.link/images/aag/_/_.png',
+  );
   const [topTextInput, setTopTextInput] = useState('_');
   const [bottomTextInput, setBottomTextInput] = useState('_');
   const [imageIDInput, setImageIDInput] = useState('aag');
+  const [dataList, setDataList] = useState();
 
-  const imgURL = `https://api.memegen.link/images/${imageIDInput}/${topTextInput}/${bottomTextInput}.png`;
+  const dataIDs = [];
 
   useEffect(() => {
     fetch(`https://api.memegen.link/templates/`)
       .then((response) => response.json())
       .then((data) => {
+        data.map((d) => dataIDs.push(d.id));
         console.log(data);
-        console.log(imgURL);
-        setImage(imgURL);
+        console.log(dataIDs);
       })
       .catch((e) => {
         console.error(`An error occurred: ${e}`);
@@ -27,8 +30,8 @@ export default function App() {
     saveAs(image, `${imageIDInput}/${topTextInput}/${bottomTextInput}.png`);
   };
 
-  console.log(topTextInput);
-  console.log(bottomTextInput);
+  // console.log(topTextInput);
+  // console.log(bottomTextInput);
 
   return (
     <body>
@@ -81,8 +84,9 @@ export default function App() {
             <form
               onSubmit={(event) => {
                 event.preventDefault();
-                setImage(imgURL);
-                console.log(imgURL);
+                setImage(
+                  `https://api.memegen.link/images/${imageIDInput}/${topTextInput}/${event.currentTarget.value}.png`,
+                );
               }}
             >
               <label htmlFor="TemplateSelect">Meme Template</label>
