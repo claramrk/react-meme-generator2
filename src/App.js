@@ -66,17 +66,6 @@ export default function App() {
       <h1>Meme Generator</h1>
       <p>{currentDate}</p>
       <div className="main">
-        <div className="main-left">
-          <div className="memePreview">
-            <div className="image-frame">
-              <img
-                src={image}
-                alt="background for meme"
-                data-test-id="meme-image"
-              />
-            </div>
-          </div>
-        </div>
         <div className="main-right">
           <div className="textInput">
             <form
@@ -164,6 +153,17 @@ export default function App() {
           */}
           <div className="download">
             <button onClick={handleClick}>Download</button>
+          </div>
+        </div>
+        <div className="main-left">
+          <div className="memePreview">
+            <div className="image-frame">
+              <img
+                src={image}
+                alt="background for meme"
+                data-test-id="meme-image"
+              />
+            </div>
           </div>
         </div>
       </div>
