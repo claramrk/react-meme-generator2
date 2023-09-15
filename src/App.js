@@ -115,7 +115,6 @@ export default function App() {
               }}
             >
               <label htmlFor="TemplateSelect">Meme Template</label>
-              <br />
               <input
                 name="TemplateSelect"
                 id="TemplateSelect"
@@ -151,9 +150,6 @@ export default function App() {
 
           </div>
           */}
-          <div className="download">
-            <button onClick={handleClick}>Download</button>
-          </div>
         </div>
         <div className="main-left">
           <div className="memePreview">
@@ -164,6 +160,9 @@ export default function App() {
                 data-test-id="meme-image"
               />
             </div>
+          </div>
+          <div className="download">
+            <button onClick={handleClick}>Download</button>
           </div>
         </div>
       </div>
