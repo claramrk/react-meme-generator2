@@ -116,19 +116,6 @@ export default function App() {
               />
             </form>
           </div>
-          <div className="generateButton">
-            <button
-              data-test-id="generate-meme"
-              onClick={() => {
-                setImage(
-                  `https://api.memegen.link/images/${imageIDInput}/${topTextInput}/${bottomTextInput}.png`,
-                );
-                saveInStorage();
-              }}
-            >
-              Generate Meme
-            </button>
-          </div>
           <div className="memeTemplateInput">
             <form
               onSubmit={(event) => {
@@ -149,6 +136,19 @@ export default function App() {
                 }}
               />
             </form>
+          </div>
+          <div className="generateButton">
+            <button
+              data-test-id="generate-meme"
+              onClick={() => {
+                setImage(
+                  `https://api.memegen.link/images/${imageIDInput}/${topTextInput}/${bottomTextInput}.png`,
+                );
+                saveInStorage();
+              }}
+            >
+              Generate Meme
+            </button>
           </div>
           {/*
           <div className="datalist">
