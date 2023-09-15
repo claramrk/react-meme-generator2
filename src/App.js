@@ -10,23 +10,21 @@ export default function App() {
   const [bottomTextInput, setBottomTextInput] = useState('_');
   const [imageIDInput, setImageIDInput] = useState('aag');
   const [currentDate, setCurrentDate] = useState('');
+  const [datalist, setDatalist] = useState('');
 
   /*
-  const dataIDs = [];
-
   useEffect(() => {
     fetch(`https://api.memegen.link/templates/`)
       .then((response) => response.json())
       .then((data) => {
+        const dataIDs = [];
         data.map((d) => dataIDs.push(d.id));
-        // console.log(data);
-        return dataIDs;
+        setDatalist(dataIDs);
       })
       .catch((e) => {
         console.error(`An error occurred: ${e}`);
       });
   });
-    console.log(dataIDs);
 */
 
   const handleClick = () => {
@@ -138,18 +136,20 @@ export default function App() {
               Generate Meme
             </button>
           </div>
+
           {/*
           <div className="datalist">
             <input list="data" />
 
             <datalist>
-              {dataIDs.map((d) => {
+              {datalist.map((d) => {
                 return <option key={`dataID-${d}`} value={d} />;
               })}
+              ;
             </datalist>
+                      </div>
 
-          </div>
-          */}
+            */}
         </div>
         <div className="main-left">
           <div className="memePreview">
