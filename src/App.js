@@ -1,6 +1,6 @@
 import './my-sass.scss';
 import { saveAs } from 'file-saver';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 export default function App() {
   const [image, setImage] = useState(
@@ -9,6 +9,7 @@ export default function App() {
   const [topTextInput, setTopTextInput] = useState('_');
   const [bottomTextInput, setBottomTextInput] = useState('_');
   const [imageIDInput, setImageIDInput] = useState('aag');
+  const [currentDate, setCurrentDate] = useState('');
 
   /*
   const dataIDs = [];
@@ -32,9 +33,35 @@ export default function App() {
     saveAs(image, `${imageIDInput}/${topTextInput}/${bottomTextInput}.png`);
   };
 
+  function saveInStorage() {
+    const date = new Date().getDate(); //Current Date
+    const month = new Date().getMonth() + 1; //Current Month
+    const year = new Date().getFullYear(); //Current Year
+    const hours = new Date().getHours(); //Current Hours
+    const min = new Date().getMinutes(); //Current Minutes
+    const sec = new Date().getSeconds();
+    return localStorage.setItem(
+      `${date}/${month}/${year} ${hours}/${min}/${sec}`,
+      `Top Text: ${topTextInput}, Bottom Text: ${bottomTextInput}, Meme Template: ${imageIDInput}`,
+    );
+  }
+
+  useEffect(() => {
+    const date = new Date().getDate(); //Current Date
+    const month = new Date().getMonth() + 1; //Current Month
+    const year = new Date().getFullYear(); //Current Year
+    const hours = new Date().getHours(); //Current Hours
+    const min = new Date().getMinutes(); //Current Minutes
+    const sec = new Date().getSeconds(); //Current Seconds
+    setCurrentDate(
+      date + '/' + month + '/' + year + ' ' + hours + ':' + min + ':' + sec,
+    );
+  }, []);
+
   return (
     <div className="main-main">
       <h1>Meme Generator</h1>
+      <p>{currentDate}</p>
       <div className="main">
         <div className="main-left">
           <div className="memePreview">
@@ -82,10 +109,6 @@ export default function App() {
                   // setImage(
                   //  `https://api.memegen.link/images/${imageIDInput}/${topTextInput}/${event.currentTarget.value}.png`,
                   // );
-                  localStorage.setItem(
-                    'Top Text - Bottom Text - Meme Template',
-                    `Top Text: ${topTextInput}, Bottom Text: ${event.currentTarget.value}, Meme Template: ${imageIDInput}`,
-                  );
                 }}
               />
             </form>
@@ -97,6 +120,7 @@ export default function App() {
                 setImage(
                   `https://api.memegen.link/images/${imageIDInput}/${topTextInput}/${bottomTextInput}.png`,
                 );
+                saveInStorage();
               }}
             >
               Generate Meme
