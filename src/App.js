@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 
 export default function App() {
   const [image, setImage] = useState(
-    'https://api.memegen.link/images/aag/_/_.png',
+    'https://api.memegen.link/images/aag/_/_.gif',
   );
   const [topTextInput, setTopTextInput] = useState('_');
   const [bottomTextInput, setBottomTextInput] = useState('_');
@@ -108,7 +108,7 @@ export default function App() {
               onSubmit={(event) => {
                 event.preventDefault();
                 setImage(
-                  `https://api.memegen.link/images/${imageIDInput}/${topTextInput}/${bottomTextInput}.png`,
+                  `https://api.memegen.link/images/${imageIDInput}/${topTextInput}/${bottomTextInput}.gif`,
                 );
               }}
             >
@@ -128,7 +128,7 @@ export default function App() {
               data-test-id="generate-meme"
               onClick={() => {
                 setImage(
-                  `https://api.memegen.link/images/${imageIDInput}/${topTextInput}/${bottomTextInput}.png`,
+                  `https://api.memegen.link/images/${imageIDInput}/${topTextInput}/${bottomTextInput}.gif`,
                 );
                 saveInStorage();
               }}
