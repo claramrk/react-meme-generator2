@@ -1,6 +1,6 @@
 import './my-sass.scss';
 import { saveAs } from 'file-saver';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 export default function App() {
   const [image, setImage] = useState(
@@ -10,6 +10,7 @@ export default function App() {
   const [bottomTextInput, setBottomTextInput] = useState('_');
   const [imageIDInput, setImageIDInput] = useState('aag');
 
+  /*
   const dataIDs = [];
 
   useEffect(() => {
@@ -24,8 +25,8 @@ export default function App() {
         console.error(`An error occurred: ${e}`);
       });
   });
-
-  console.log(dataIDs);
+    console.log(dataIDs);
+*/
 
   const handleClick = () => {
     saveAs(image, `${imageIDInput}/${topTextInput}/${bottomTextInput}.png`);
@@ -58,19 +59,17 @@ export default function App() {
                 name="Top Text"
                 id="Top Text"
                 onChange={(event) => {
-                  //  setTopTextInput(event.target.value);
                   if (event.target.value.length > 0) {
                     setTopTextInput(event.target.value);
-                    setImage(
-                      `https://api.memegen.link/images/${imageIDInput}/${event.target.value}/${bottomTextInput}.png`,
-                    );
+                    // setImage(
+                    //  `https://api.memegen.link/images/${imageIDInput}/${event.target.value}/${bottomTextInput}.png`,
+                    // );
                   } else {
                     setTopTextInput('_');
-                    setImage(
-                      `https://api.memegen.link/images/${imageIDInput}/_/${bottomTextInput}.png`,
-                    );
+                    // setImage(
+                    //  `https://api.memegen.link/images/${imageIDInput}/_/${bottomTextInput}.png`,
+                    // );
                   }
-                  // setImage( `https://api.memegen.link/images/${imageIDInput}/${event.target.value}/${bottomTextInput}.png`, );
                 }}
               />
               <br />
@@ -80,12 +79,28 @@ export default function App() {
                 id="Bottom Text"
                 onChange={(event) => {
                   setBottomTextInput(event.currentTarget.value);
-                  setImage(
-                    `https://api.memegen.link/images/${imageIDInput}/${topTextInput}/${event.currentTarget.value}.png`,
+                  // setImage(
+                  //  `https://api.memegen.link/images/${imageIDInput}/${topTextInput}/${event.currentTarget.value}.png`,
+                  // );
+                  localStorage.setItem(
+                    'Top Text - Bottom Text - Meme Template',
+                    `Top Text: ${topTextInput}, Bottom Text: ${event.currentTarget.value}, Meme Template: ${imageIDInput}`,
                   );
                 }}
               />
             </form>
+          </div>
+          <div className="generateButton">
+            <button
+              data-test-id="generate-meme"
+              onClick={() => {
+                setImage(
+                  `https://api.memegen.link/images/${imageIDInput}/${topTextInput}/${bottomTextInput}.png`,
+                );
+              }}
+            >
+              Generate Meme
+            </button>
           </div>
           <div className="memeTemplateInput">
             <form
