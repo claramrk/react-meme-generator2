@@ -10,24 +10,23 @@ export default function App() {
   const [bottomTextInput, setBottomTextInput] = useState('_');
   const [imageIDInput, setImageIDInput] = useState('aag');
   const [currentDate, setCurrentDate] = useState('');
-  // const [datalist, setDatalist] = useState('');
 
-  /*
+  const [datalist, setDatalist] = useState([]);
+
   useEffect(() => {
     fetch(`https://api.memegen.link/templates/`)
       .then((response) => response.json())
       .then((data) => {
-        // const dataIDs = [];
-        // data.map((d) => dataIDs.push(d.id));
-        // setDatalist(dataIDs);
-        setDatalist(data);
+        const newDataList = [...datalist];
+        newDataList.push(data);
+        setDatalist(newDataList);
+        console.log(newDataList);
       })
       .catch((e) => {
         console.error(`An error occurred: ${e}`);
       });
-  });
+  }, []);
 
-*/
   const handleClick = () => {
     saveAs(image, `${imageIDInput}/${topTextInput}/${bottomTextInput}.gif`);
   };
@@ -130,15 +129,22 @@ export default function App() {
           </div>
           {/*
           <div className="datalist">
-            <input list="data" />
+            <select
+              list="dataListTemplates"
+              id="dataListTemplates"
+              name="dataListTemplates"
+            >
+              <option key="dataID-default" value="default">
+                --Please choose an option--
+              </option>
 
-            <datalist>
-              {datalist.map((d) => {
-                return <option key={`dataID-${d.id}`} value={d.id} />;
+              {datalist[0].map((d) => {
+                return <option key={`dataID-${d.id}`} value={d.id}>{d.id}< /option>;
               })}
-            </datalist>
+
+            </select>
           </div>
-            */}
+          */}
         </div>
         <div className="main-left">
           <div className="memePreview">
