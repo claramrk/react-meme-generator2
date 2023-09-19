@@ -10,25 +10,26 @@ export default function App() {
   const [bottomTextInput, setBottomTextInput] = useState('_');
   const [imageIDInput, setImageIDInput] = useState('aag');
   const [currentDate, setCurrentDate] = useState('');
-  const [datalist, setDatalist] = useState('');
+  // const [datalist, setDatalist] = useState('');
 
   /*
   useEffect(() => {
     fetch(`https://api.memegen.link/templates/`)
       .then((response) => response.json())
       .then((data) => {
-        const dataIDs = [];
-        data.map((d) => dataIDs.push(d.id));
-        setDatalist(dataIDs);
+        // const dataIDs = [];
+        // data.map((d) => dataIDs.push(d.id));
+        // setDatalist(dataIDs);
+        setDatalist(data);
       })
       .catch((e) => {
         console.error(`An error occurred: ${e}`);
       });
   });
-*/
 
+*/
   const handleClick = () => {
-    saveAs(image, `${imageIDInput}/${topTextInput}/${bottomTextInput}.png`);
+    saveAs(image, `${imageIDInput}/${topTextInput}/${bottomTextInput}.gif`);
   };
 
   function saveInStorage() {
@@ -78,14 +79,8 @@ export default function App() {
                 onChange={(event) => {
                   if (event.target.value.length > 0) {
                     setTopTextInput(event.target.value);
-                    // setImage(
-                    //  `https://api.memegen.link/images/${imageIDInput}/${event.target.value}/${bottomTextInput}.png`,
-                    // );
                   } else {
                     setTopTextInput('_');
-                    // setImage(
-                    //  `https://api.memegen.link/images/${imageIDInput}/_/${bottomTextInput}.png`,
-                    // );
                   }
                 }}
               />
@@ -96,9 +91,6 @@ export default function App() {
                 id="Bottom Text"
                 onChange={(event) => {
                   setBottomTextInput(event.currentTarget.value);
-                  // setImage(
-                  //  `https://api.memegen.link/images/${imageIDInput}/${topTextInput}/${event.currentTarget.value}.png`,
-                  // );
                 }}
               />
             </form>
@@ -136,19 +128,16 @@ export default function App() {
               Generate Meme
             </button>
           </div>
-
           {/*
           <div className="datalist">
             <input list="data" />
 
             <datalist>
               {datalist.map((d) => {
-                return <option key={`dataID-${d}`} value={d} />;
+                return <option key={`dataID-${d.id}`} value={d.id} />;
               })}
-              ;
             </datalist>
-                      </div>
-
+          </div>
             */}
         </div>
         <div className="main-left">
