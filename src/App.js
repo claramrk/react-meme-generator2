@@ -127,7 +127,7 @@ export default function App() {
               Generate Meme
             </button>
           </div>
-          {/*
+
           <div className="datalist">
             <select
               list="dataListTemplates"
@@ -138,13 +138,18 @@ export default function App() {
                 --Please choose an option--
               </option>
 
+              {/*
               {datalist[0].map((d) => {
-                return <option key={`dataID-${d.id}`} value={d.id}>{d.id}< /option>;
+                return (
+                  <option key={`dataID-${d.id}`} value={d.id}>
+                    {d.id}
+                  </option>
+                );
               })}
 
+            */}
             </select>
           </div>
-          */}
         </div>
         <div className="main-left">
           <div className="memePreview">
