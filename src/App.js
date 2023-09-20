@@ -126,13 +126,16 @@ export default function App() {
               Generate Meme
             </button>
           </div>
-
+          {/*
           <div className="datalist">
-            <select
-              list="dataListTemplates"
-              id="dataListTemplates"
-              name="dataListTemplates"
-            >
+          <input
+                name="TemplateSelectDatalist"
+                id="TemplateSelectDatalist"
+                value={imageIDInput}
+                onChange={(event) => {
+                  setImageIDInput(event.currentTarget.value);
+                }}
+              />
               <option key="dataID-default" value="default">
                 --Please choose an option--
               </option>
@@ -146,6 +149,26 @@ export default function App() {
               })}
             </select>
           </div>
+          <div className="select">
+            <select
+              list="selectTemplates"
+              id="selectTemplates"
+              name="selectTemplates"
+            >
+              <option key="dataID-default-select" value="default-select">
+                --Please choose an option--
+              </option>
+
+              {datalist.map((d) => {
+                return (
+                  <option key={`dataID-select-${d.id}`} value={d.id}>
+                    {d.id}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
+            */}
         </div>
         <div className="main-left">
           <div className="memePreview">
