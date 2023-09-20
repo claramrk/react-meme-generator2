@@ -17,8 +17,7 @@ export default function App() {
     fetch(`https://api.memegen.link/templates/`)
       .then((response) => response.json())
       .then((data) => {
-        const newDataList = [...datalist];
-        newDataList.push(data);
+        const newDataList = [...datalist, ...data];
         setDatalist(newDataList);
         console.log(newDataList);
       })
