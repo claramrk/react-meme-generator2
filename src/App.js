@@ -137,16 +137,13 @@ export default function App() {
                 --Please choose an option--
               </option>
 
-              {/*
-              {datalist[0].map((d) => {
+              {datalist.map((d) => {
                 return (
                   <option key={`dataID-${d.id}`} value={d.id}>
                     {d.id}
                   </option>
                 );
               })}
-
-            */}
             </select>
           </div>
         </div>
